@@ -1,0 +1,310 @@
+<div class="col-sm-12 form-container bdr bdr-gray6">
+	<!--TABS-->
+	<div class="col-sm-12 form-header fncl-light no-margin">
+		<ul class="nav nav-tabs bgcl-gray6">
+			<li class="active"><a href="<?php echo site_url() ?>../Tools/C_Check"><span class="glyphicon glyphicon-chevron-left"></span>Checks</a></li>
+		</ul>
+	</div>
+	<!--CLOSE TABS-->
+	<form id="form" action="<?php echo site_url() ?>../Tools/C_Check" method="POST" enctype="multipart/form-data">
+
+		<div class="form-popup" style="">
+			<div class="form-popup-inner no-padding" style="">
+
+				<div class="formpop cancel_check">
+					<div class="popup-header bdrcl2">Message</div>
+					<div class="formpop" style="width:100%" data-action='cancel' data-url="<?php echo site_url() ?>../Tools/C_Check">
+						<div class="form-message" style="overflow:hidden; padding-top: 5px; ">
+							Message
+						</div>
+					</div>
+					<div class="form-popup-button no-margin no-padding" style="text-align:center">
+						<a href="#" class="btn bgcl-primary fbtn-assign" role="button" dataonerror="no-fade" data-url="<?php echo site_url() ?>../Tools/C_Check">
+							<i class="glyphicon glyphicon-check"></i> Ok
+						</a>
+						<a href="#" class="btn bgcl-secondary fclose-popup fbtn-cancel" role="button">
+							<i class="glyphicon glyphicon-remove"></i> Cancel
+						</a>
+					</div>
+				</div>
+
+				<div class="formpop edit_check">
+					<div class="popup-header bdrcl2">Message</div> 
+
+					<div class="form-message" style="overflow:hidden; padding-top: 5px; text-align:left">
+					
+						<div class="col-sm-12 form-group" style = "text-align:left">
+							<label>Check Date</label>
+							<div class="col-sm-12 input-group date" data-provide="datepicker">
+								<input placeholder="mm/dd/yyyy" type="text" class="form-control jenno_date required" id="ec_date" name="ec[date]" value="" />
+								<div class="input-group-addon"> <span class="glyphicon glyphicon-th"></span> </div>
+							</div> 
+						</div>
+						<div class="col-sm-12 form-group" style = "text-align:left">
+							<label>
+								Bank 
+							</label>
+							<select class="form-control banksel required" 	 name="ec[bank_code]" id="ec_bank"></select>
+							<input type="hidden" class="form-control required" name="ec[check]" id="ec_check" value="" />
+						</div> 
+						<div class="col-sm-12 form-group"  style = "text-align:left">
+							<label>Check No. </label>
+							<input type="text" class="form-control required" name="ec[check_no]" id="ec_check_no" value="" />
+						</div>
+					</div>
+					<div class="form-popup-button no-margin no-padding" style="text-align:center">
+						<a href="#" class="btn bgcl-primary fbtn-editcheck" role="button" dataonerror="no-fade" data-url="<?php echo site_url() ?>../Tools/C_Check">
+							<i class="glyphicon glyphicon-check"></i> Ok
+						</a>
+						<a href="#" class="btn bgcl-secondary fclose-popup fbtn-cancel" role="button">
+							<i class="glyphicon glyphicon-remove"></i> Cancel
+						</a>
+					</div> 
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="col-sm-12 tab-content form-body bgcl-white  w-shadow brdcl">
+
+			<!--FORM TABLE -->
+			<div class="col-sm-12 w-shadow bdr bdr-gray6" style="padding:10px; margin-bottom:20px">
+				<!--LEVEL1 -->
+				<div class="col-sm-8 form-section-title">Add Cancelled Check</div>	 
+				<div class="col-sm-12">
+					<div class="col-sm-3 form-group">
+						<label>Check Date</label>
+						<div class="col-sm-12 input-group date" data-provide="datepicker">
+							<input placeholder="mm/dd/yyyy" type="text" class="form-control jenno_date required" id="c_date" name="c_date" value="<?= Date("m/d/Y") ?>" />
+							<div class="input-group-addon"> <span class="glyphicon glyphicon-th"></span> </div>
+						</div>
+						<input type="hidden" class="form-control" name="c_edit" id="c_edit" value="0" />
+					</div>
+					<div class="col-sm-4 form-group">
+						<label>Bank </label>
+						<select class="form-control required banksel" name="c_bank" id="c_bank"> </select>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label>Check No.</label>
+						<input type="text" class="form-control required" name="c_no" id="c_no" value="" />
+					</div>
+					<div class="col-sm-1 form-group">
+						<label>&nbsp;</label>
+						<a href="#" class="btn bgcl-primary action fncl-light" role="button" data-action="save" style="width : 100%" data-toggle="tooltip" title="Add Code" data-placement="bottom"> Save </a>
+					</div>
+				</div>
+			</div>
+
+			<!-- FORM FOR TABLE-->
+			<div class="col-sm-12 form-section w-shadow bdr bdr-gray6">
+				<!--LEVEL1 -->
+
+				<div id="tb" style = "height : 40px; padding : 3px; text-align:right"  >
+					<div class="col-sm-9" style = "padding: 0; padding-right : 5px">  
+						<div class="col-sm-2" style = "padding: 0; padding-right : 5px">  
+							<div class="col-sm-12 input-group date" data-provide="datepicker">
+								<input placeholder="mm/dd/yyyy" type="text" class="form-control datefrom" id="dtfrom" name="dtfrom"  
+									value = "<?php echo date_format(date_create($info->fr),"m/d/Y");   ?>" />
+								<div class="input-group-addon"> <span class="glyphicon glyphicon-th"></span> </div>
+							</div> 
+						</div>
+						<div class="col-sm-2 "  style = "padding: 0; padding-right : 5px" >  
+							<div class="col-sm-12 input-group date " data-provide="datepicker"   >
+								<input placeholder="mm/dd/yyyy" type="text" class="form-control dateto" id="dtto" name="dtto"   
+									value = "<?php echo  date_format(date_create($info->to),"m/d/Y");  ?>"  />
+								<div class="input-group-addon"> <span class="glyphicon glyphicon-th"></span> </div>
+							</div>  
+						</div>
+						<div class="col-sm-2 "  style = "padding: 0; padding-right : 5px" >  
+							<select class="form-control" id='filter' name='filter' style = "width : 100%" >
+								<option value="collected">Collected</option>
+								<option value="not_collected">To be Collected</option> 
+								<option value="jev">JEV Assigned</option> 
+								<option value="no_jev">No JEV Assigned</option> 
+								<option value="cancelled">Cancelled</option> 
+								<option value="staled">Staled</option> 
+								<option value="issued">Issued</option> 
+								<option value="all" selected>All</option> 
+							</select>    
+						</div>	
+						<div class="col-sm-1 no-padding ">   
+							<a href="#" class="btn bgcl-primary fbtn-filter" role="button" style="width : 100%; padding-right : 2px; display: inline-block" 
+								data-url = "<?php echo site_url()?>../Tools/C_Check"> 
+								<i class="glyphicon glyphicon-filter"></i> 
+								Filter 
+							</a> 
+						</div>
+					</div>
+				
+					<div class="col-sm-1 "  style = "padding: 0; padding-right : 5px" >  
+						<select class="form-control" id='type' name='type'  >
+							<option value="list">List</option>
+							<option value="advice">Advice</option>
+							<option value="transmital">Transmital</option>
+							<option value="register">Register</option> 
+							<option value="issued">Issued</option> 
+						</select>    
+					</div>
+					<div class="col-sm-1 "  style = "padding: 0; padding-right : 5px" >  
+						<select class="form-control" id='doctype' name='doctype' style = "width : 100%" >
+							<option value="pdf">PDF</option>
+							<option value="xlsx">Excel</option> 
+						</select>    
+					</div>
+					<div class="col-sm-1 no-padding ">   
+					<!--	<a href="#" class="btn bgcl-primary fbtn-search" role="button" style="width : 48%; padding-right : 2px; display: inline-block" 
+							data-url = "<?php echo site_url()?>../Tools/C_Check"> 
+							<i class="glyphicon glyphicon-search"></i> 
+							Search 
+						</a>  -->
+						<a href="#" class="btn bgcl-primary fbtn-print" role="button" style="width : 100%;  display: inline-block" 
+							data-url = "<?php echo site_url()?>../Print/C_PrintToolList"> 
+							<i class="glyphicon glyphicon-print"></i> 
+							Print 
+						</a> 
+					</div> 
+				</div>
+
+				<input type="hidden" class="form-control" name="edit" id="edit" value="" />
+				<input type="hidden" class="form-control" name="forprint" id="forprint" />
+
+				<div class="col-sm-12"> &nbsp; </div>
+				<?php echo $info->table; ?>
+
+			</div>
+
+		</div>
+
+		<script>
+			$('#dg').datagrid({ toolbar: '#tb' });
+			 
+			$("#form").on("change","#type", function(event){
+				if($(this).val() == "transmital"){
+					$("#doctype").val("pdf");
+				}
+			});
+		
+			$("#form").on("change","#doctype", function(event){
+				if($("#type").val() == "transmital" && $(this).val() == "xlsx"){ 
+					popMessage("Export to Spreadsheet is not available for the selected form.",true,true);
+					$("#doctype").val("pdf");
+				}
+			}); 
+
+			$("#form").on("click",".fbtn-assign", function(event){
+				oldurl = $("#form").attr('action');
+				url = $(this).data("url")
+				
+				$("#form").attr('target','_self'); 
+				$("#form").attr('action',url); 
+							
+				submitform('cancel'); 
+			});  
+
+			$("#form").on("click",".fbtn-editcheck", function(event){
+				oldurl = $("#form").attr('action');
+				url = $(this).data("url")
+				url = url+'?action=editcheck'
+				
+				$("#form").attr('target','_self'); 
+				$("#form").attr('action',url);  
+				
+				let myForm = document.getElementById('form');
+				var fdata = new FormData(myForm);
+ 
+				fdata.append('action', 'editcheck');
+
+				submitJS('form', 'editcheck', url, fdata);   
+				
+				$("#form").attr('action',oldurl);   
+			}); 
+
+
+			$("#form").on("click",".fbtn-filter", function(event){ 
+				var df  = $("#dtfrom").val().split("/") 
+				var dt  = $("#dtto").val().split("/") 
+				df = df[2]+'-'+df[0]+'-'+df[1]
+				dt = dt[2]+'-'+dt[0]+'-'+dt[1]
+ 
+				url =  $(this).data("url") + "?action=loadgrid&fr=" + df + "&to="+ dt +"&filter=" + $("#filter").val(); 
+							
+				$('#dg').datagrid('load', url); 
+			});
+
+			$("#form").on("click",".fbtn-print", function(event){
+				oldurl = $("#form").attr('action');
+				url = $(this).data("url")
+				
+				var doctype = $("#doctype").val();
+
+				if( $("#type").val() == "transmital" && doctype == "xlsx"){
+					popMessage("Export to Spreadsheet is not available for the selected form.",true,true);
+					return false;
+				}
+				
+				if( $("#type").val() != "transmital" ){
+					var dg = $('#dg')
+					var checked = dg.datagrid('getChecked');
+					var row = dg.datagrid('getRows');
+
+					var cprint = []
+					$.each(row, function(index, value) { 
+						if ($.inArray(value, checked) >= 0) { 
+							cprint.push(value.check_key); 
+						} 
+					});
+
+					$("#forprint").val(JSON.stringify(cprint));
+				} 
+
+				if(doctype == "xlsx"){ 
+					url = '<?php echo site_url() ?>../Print/C_GenerateSPSheet'; 
+					action = "print-list&type=check_"+$("#type").val();
+				} else{
+					action = 'check_'+$("#type").val();
+				}
+				
+				$("#form").attr('action',url); 
+			
+				$("#form").attr('target','_blank'); 
+				submitform(action); 
+				
+				$("#form").attr('target','_self'); 
+				$("#form").attr('action',oldurl);  
+				
+			});
+			
+			$("#form").on("click",".fbtn-search", function(event){
+				oldurl = $("#form").attr('action');
+				url = $(this).data("url")
+				
+				$("#form").attr('target','_self'); 
+				$("#form").attr('action',url); 
+							
+				submitform('search'); 
+				
+				$("#form").attr('target','_self'); 
+				$("#form").attr('action',oldurl);  
+			});
+
+			function activate(action, response){ 
+				if(action != "editcheck"){ return false; }  
+
+				if(response.success == false){  
+					popMessage(response.message, true, true);  
+					$('.form-popup').fadeOut('slow'); 
+					return true;
+				}
+
+				if(action == "editcheck"){  
+					popMessage(response.message, true, false);
+					$("#dg").datagrid('load') 
+					$('.form-popup').fadeOut('slow'); 
+					return true;
+				}
+			}
+			
+		</script>
+		<!-- FORM FOR TABLE-->
+	</form>
+</div>
